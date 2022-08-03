@@ -75,7 +75,7 @@ resource "aws_kms_alias" "ingest" {
 # == Lambda == #
 
 resource "aws_iam_role" "iam_for_lambda" {
-  name_prefix        = "lambda-${local.name}"
+  name_prefix        = "${local.name}"
   assume_role_policy = <<-EOF
   {
     "Version": "2012-10-17",
