@@ -1,4 +1,10 @@
-provider "aws" {}
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+    }
+  }
+}
 
 locals {
   need_kms                = var.kms_key_id == null
