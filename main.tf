@@ -75,7 +75,7 @@ resource "aws_kms_alias" "ingest" {
 # == Lambda == #
 
 resource "aws_iam_role" "iam_for_lambda" {
-  name_prefix        = "${local.name}"
+  name_prefix        = local.name
   assume_role_policy = <<-EOF
   {
     "Version": "2012-10-17",
@@ -91,6 +91,12 @@ resource "aws_iam_role" "iam_for_lambda" {
     ]
   }
   EOF
+}
+
+resource "aws_iam_role_policy_attachment" "basic_execution" {
+  role       = aws_iam_role.iam_for_lambda.id
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+
 }
 
 resource "aws_s3_object" "initial" {
